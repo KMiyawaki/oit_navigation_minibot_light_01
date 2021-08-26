@@ -1,0 +1,24 @@
+<launch>
+  <arg name="ydlidar_port" default="/dev/ydlidar"/>
+  <arg name="use_rviz" default="false" />
+  <arg name="rviz_conf" default="$(find oit_navigation_minibot_light_01)/config/rviz/simple.rviz" />
+  <arg name="rviz_required" default="true" />
+
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/roboclaw.launch"/>
+
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/ydlidar.launch">
+    <param name="port" type="string" value="$(arg ydlidar_port)"/>
+  </include>
+
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" output="screen">
+    <rosparam command="load" file="$(find oit_navigation_minibot_light_01)/config/laser_filter.yaml" />
+    <remap from="scan_filtered" to="base_scan" />
+  </node>
+
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/state_publisher.launch">
+  </include>
+
+  <group if="$(arg use_rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" required="$(arg rviz_required)" />
+  </group>
+</launch>
