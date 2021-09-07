@@ -113,6 +113,17 @@ $ roslaunch oit_navigation_minibot_light_01 navigation.launch map_name:=test # m
 
 自己位置推定、ゴール指定方法はこれまで通り。
 
+## ロボットの電源を OFF にする
+
+- ロボット側端末で Jetson NANO をシャットダウンする。
+
+```shell
+jetson@jetson-desktop:~/catkin_ws/src/my_microbot_apps/launch/real$ shutdown -h now
+```
+
+- 起動時に押下した、Jetson NANO 用の電源スイッチを OFF にする。
+  - DC-DC コンバータの LED が消灯する。
+
 ## 作成した地図をシミュレータで使う
 
 ```shell
@@ -132,3 +143,22 @@ $ roslaunch oit_navigation_minibot_light_01 stage_navigation.launch map_name:=te
 ```shell
 $ roslaunch oit_navigation_minibot_light_01 stage_navigation.launch map_name:=test # map_name:=以降の文字をナビゲーション時に利用する地図名に変更する。
 ```
+
+## ロボットから電池を外して充電する
+
+- コネクタのロックを十分に押して完全に外す。
+- リード線ではなく、コネクタをしっかりと掴んで引き抜く。
+  - リード線を強引に引っ張ると、DC-DC コンバータからリード線が抜けてしまう。注意して引き抜くこと。
+
+![20200206_181707.jpg](./images/20200206_181707.jpg)
+
+- 充電器に電池を接続し、 NiMH のLEDが点灯していることを良く確認して BATTERY ボタンを長押しする。
+  - NiMH の LED が点灯していない場合は BATTERY ボタンを複数回押して NiMH に合わせる。
+- NiMH の LED が赤く点灯し充電が始まる。
+  - 充電中は点滅する。詳細は[充電器のマニュアル](https://hitecrcd.co.jp/download/x1nano-jpn/)を参照。
+
+![20200206_182347.jpg](./images/20200206_182347.jpg)
+
+- NiMH の LED が緑色に点灯すると充電は完了している。
+
+![20200206_182317.jpg](./images/20200206_182317.jpg)
