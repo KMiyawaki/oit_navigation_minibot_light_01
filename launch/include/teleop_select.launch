@@ -2,7 +2,7 @@
   <arg name="topic_cmd_vel" default="/cmd_vel" />
   <!-- mouse joy key none -->
   <arg name="teleop" default="joy" />
-  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_dev" default="/dev/input/js1" />
   <arg name="joy_conf" default="$(find oit_navigation_minibot_light_01)/config/joy.yaml" />
   <arg name="key_teleop_max_linear" default="0.15" />
   <arg name="key_teleop_max_angular" default="$(eval 30 * 3.141592653589793 / 180.0)" />
