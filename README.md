@@ -7,6 +7,7 @@
 ```shell
 $ cd ~/catkin_ws/src
 $ git clone https://github.com/YDLIDAR/ydlidar_ros.git
+$ git clone https://github.com/aamirhatim/twist_filter.git
 $ cd ~/catkin_ws/src/ydlidar_ros
 $ git checkout refs/tags/1.4.1
 $ sudo apt install ros-melodic-teleop-twist-keyboard
