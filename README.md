@@ -2,28 +2,16 @@
 
 演習用小型ロボットの説明。
 
-## 必要なソフト・ハード
-
-```shell
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/YDLIDAR/ydlidar_ros.git
-$ git clone https://github.com/aamirhatim/twist_filter.git
-$ cd ~/catkin_ws/src/ydlidar_ros
-$ git checkout refs/tags/1.4.1
-$ sudo apt install ros-melodic-teleop-twist-keyboard
-$ sudo apt install ros-melodic-key-teleop
-$ sudo apt install xterm
-```
-
-- テレオペや地図作成にはジョイスティックがあった方が便利。
-
 ## インストール
 
 ```shell
 $ cd ~/catkin_ws/src
 $ git clone https://github.com/KMiyawaki/oit_navigation_minibot_light_01.git
-$ cd ~/catkin_ws && catkin_make
+$ cd ~/catkin_ws/src/oit_navigation_minibot_light_01
+$ ./install.sh
 ```
+
+- テレオペや地図作成にはジョイスティックがあった方が便利。
 
 ## ロボットの起動
 
