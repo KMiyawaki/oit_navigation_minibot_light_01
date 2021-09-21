@@ -13,14 +13,14 @@ DWAPlannerROS:
   acc_lim_trans: 0.1
   prune_plan: true
   xy_goal_tolerance: 0.2
-  yaw_goal_tolerance: 0.17
+  yaw_goal_tolerance: deg(20)
   trans_stopped_vel: 0.1
   theta_stopped_vel: 0.0
   sim_time: 3
   sim_granularity: 0.2
   angular_sim_granularity: 0.1
-  path_distance_bias: 10
-  goal_distance_bias: 5
+  path_distance_bias: 8 # 0.8
+  goal_distance_bias: 3 # 0.6
   occdist_scale: 0.01
   twirling_scale: 0.0
   stop_time_buffer: 0.2
