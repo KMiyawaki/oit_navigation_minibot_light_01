@@ -54,8 +54,8 @@ Bluetooth キーボードはタッチパッド上で一本指でタッチする�
 任意のディレクトリで下記のコマンドを起動する。
 
 ```shell
-$ roslaunch oit_navigation_minibot_light_01 teleop.launch teleop:=joy
-# teleop:=joy をつけない場合はキーボードによるテレオペが起動する。
+$ roslaunch oit_navigation_minibot_light_01 teleop.launch
+# teleop:=joy をつけるとジョイスティックによるテレオペが起動する。
 ```
 
 ### SLAMによる地図作成
@@ -63,8 +63,8 @@ $ roslaunch oit_navigation_minibot_light_01 teleop.launch teleop:=joy
 ジョイスティックでロボットを操作しながらロボット周囲の環境の地図を作成する。
 
 ```shell
-$ roslaunch oit_navigation_minibot_light_01 mapping.launch teleop:=joy
-# teleop:=joy をつけない場合はキーボードによるテレオペが起動する。
+$ roslaunch oit_navigation_minibot_light_01 mapping.launch
+# teleop:=joy をつけるとジョイスティックによるテレオペが起動する。
 ```
 
 地図作成が終わったら、上記で起動したソフトを**絶対に終了させずに**別ターミナルで以下のコマンドを実行して地図を保存する。
@@ -108,7 +108,7 @@ $ roslaunch oit_navigation_minibot_light_01 navigation.launch map_name:=test # m
 - ロボット側端末で Jetson NANO をシャットダウンする。
 
 ```shell
-jetson@jetson-desktop:~/catkin_ws/src/my_microbot_apps/launch/real$ shutdown -h now
+$ sudo shutdown -h now
 ```
 
 - 起動時に押下した、Jetson NANO 用の電源スイッチを OFF にする。
