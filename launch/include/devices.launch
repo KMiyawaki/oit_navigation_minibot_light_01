@@ -3,6 +3,7 @@
   <arg name="use_rviz" default="false" />
   <arg name="rviz_conf" default="$(find oit_navigation_minibot_light_01)/config/rviz/simple.rviz" />
   <arg name="rviz_required" default="true" />
+  <arg name="use_camera" default="true" />
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/include/roboclaw.launch"/>
 
@@ -21,4 +22,8 @@
   <group if="$(arg use_rviz)">
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" required="$(arg rviz_required)" />
   </group>
+
+  <include if="$(arg use_camera)" file="$(find ros_deep_learning)/launch/video_source.ros1.launch">
+    <arg name="input" value="csi://0" />
+  </include>
 </launch>

@@ -28,6 +28,19 @@ define YDLIDAR_X4 ranger
   update_interval 25
 )
 
+define IMX219_D160 camera
+(
+  # https://www.waveshare.com/imx219-d160.htm
+  resolution [ 1280 720 ]
+  range [ 0.2 20.0 ]
+  fov [ 155.1263859 147.2783641 ]
+  pantilt [ 0.0 0.0 ]
+
+  # model properties
+  size [ 0.03 0.02 0.05 ]
+  color "black"
+)
+
 define robot position
 (
   size   [0.24 0.24 0.158]
@@ -35,6 +48,7 @@ define robot position
   gui_nose 1
   drive "diff"
   YDLIDAR_X4(pose [ 0.03 0 0.0787 0 ])
+  IMX219_D160(pose [ 0 0 0.10125 0 ])
   velocity_bounds     [-1.2 1.2 0 0 0 0 -270 270]
   acceleration_bounds [-1.2 1.2 0 0 0 0 -270 270]
   update_interval 25

@@ -31,6 +31,7 @@
   <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg simulation_world)" respawn="false">
     <param name="base_watchdog_timeout" value="0.2"/>
     <remap from="/cmd_vel" to="/stageros/cmd_vel" />
+    <remap from="/image" to="/video_source/raw" />
   </node>
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/include/state_publisher.launch">
