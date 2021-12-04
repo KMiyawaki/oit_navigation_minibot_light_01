@@ -152,3 +152,16 @@ $ roslaunch oit_navigation_minibot_light_01 stage_navigation.launch map_name:=te
 - NiMH の LED が緑色に点灯すると充電は完了している。
 
 ![20200206_182317.jpg](./images/20200206_182317.jpg)
+
+## ソフトのアップデート
+
+以下のコマンドでロボットのソフトをアップデートできる。ただし、パッケージ`oit_navigation_minibot_light_01`に加えた変更は全て消去される。
+
+```shell
+$ roscd oit_navigation_minibot_light_01
+$ git fetch
+$ git checkout main
+$ git reset --hard origin/main
+$ git pull
+Already up to date.
+```
