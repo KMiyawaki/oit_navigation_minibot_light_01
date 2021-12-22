@@ -33,6 +33,11 @@ rect_block(
   color "blue"
 )
 
+rect_block(
+  pose [1 -2 0 0]
+  color "red"
+)
+
 polygon_block(
   pose [0 2 0 0]
   color "yellow"
