@@ -4,10 +4,11 @@
   <arg name="rviz_conf" default="$(find oit_navigation_minibot_light_01)/config/rviz/simple.rviz" />
   <arg name="rviz_required" default="true" />
   <arg name="use_camera" default="true" />
+  <arg name="use_ydlidar" default="true" />
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/include/roboclaw.launch"/>
 
-  <include file="$(find oit_navigation_minibot_light_01)/launch/include/ydlidar.launch">
+  <include if="$(arg use_ydlidar)" file="$(find oit_navigation_minibot_light_01)/launch/include/ydlidar.launch">
     <param name="port" type="string" value="$(arg ydlidar_port)"/>
   </include>
 

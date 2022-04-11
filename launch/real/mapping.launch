@@ -10,6 +10,7 @@
   <arg name="ymin" default="-5"/>
   <arg name="ymax" default="5"/>
   <arg name="use_camera" default="true" />
+  <arg name="use_ydlidar" default="true" />
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/real/teleop.launch">
     <arg name="use_rviz" value="$(arg use_rviz)" />
@@ -17,6 +18,7 @@
     <arg name="rviz_required" value="$(arg rviz_required)" />
     <arg name="teleop" value="$(arg teleop)" />
     <arg name="use_camera" value="$(arg use_camera)" />
+    <arg name="use_ydlidar" value="$(arg use_ydlidar)" />
   </include>
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
