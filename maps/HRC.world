@@ -9,7 +9,7 @@ interval_sim 25  # simulation timestep in milliseconds
 # configure the GUI window
 window
 (
-  size [700.000 700.000]
+  size [700.000 400.000]
   scale 20
 )
 
