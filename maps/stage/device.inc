@@ -43,12 +43,12 @@ define IMX219_D160 camera
 
 define robot position
 (
-  size   [0.24 0.24 0.158]
+  size   [0.23 0.23 0.132]
   origin [-0.05 0 0 0] # move rotation center forward
   gui_nose 1
   drive "diff"
   YDLIDAR_X4(pose [ 0.03 0 0.0787 0 ])
-  IMX219_D160(pose [ 0 0 0.10125 0 ])
+  IMX219_D160(pose [ 0.03 0 0.10125 0 ])
   velocity_bounds     [-1.2 1.2 0 0 0 0 -270 270]
   acceleration_bounds [-1.2 1.2 0 0 0 0 -270 270]
   update_interval 25
