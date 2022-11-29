@@ -34,7 +34,7 @@
     <remap from="/image" to="/video_source/raw" />
   </node>
 
-  <include file="$(find oit_navigation_minibot_light_01)/launch/include/state_publisher.launch">
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/robot_state_publisher.launch">
   </include>
 
   <group if="$(arg use_rviz)">

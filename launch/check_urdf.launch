@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/robot_state_publisher.launch"/>
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/rviz.launch">
+    <arg name="file" value="check_urdf" />
+  </include>
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+</launch>

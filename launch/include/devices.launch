@@ -1,10 +1,9 @@
 <launch>
-  <arg name="ydlidar_port" default="/dev/ydlidar"/>
   <arg name="use_rviz" default="false" />
-  <arg name="rviz_conf" default="$(find oit_navigation_minibot_light_01)/config/rviz/simple.rviz" />
   <arg name="rviz_required" default="true" />
   <arg name="use_camera" default="true" />
   <arg name="use_ydlidar" default="true" />
+  <arg name="ydlidar_port" default="/dev/ydlidar"/>
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/include/roboclaw.launch"/>
 
@@ -17,12 +16,13 @@
     <remap from="scan_filtered" to="base_scan" />
   </node>
 
-  <include file="$(find oit_navigation_minibot_light_01)/launch/include/state_publisher.launch">
+  <include file="$(find oit_navigation_minibot_light_01)/launch/include/robot_state_publisher.launch">
   </include>
 
-  <group if="$(arg use_rviz)">
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" required="$(arg rviz_required)" />
-  </group>
+  <include if="$(arg use_rviz)" file="$(find oit_navigation_minibot_light_01)/launch/include/rviz.launch">
+    <arg name="file" value="simple" />
+    <arg name="required" value="$(arg rviz_required)" />
+  </include>
 
   <include if="$(arg use_camera)" file="$(find ros_deep_learning)/launch/video_source.ros1.launch">
     <arg name="input" value="csi://0" />

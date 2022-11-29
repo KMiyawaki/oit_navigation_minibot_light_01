@@ -1,0 +1,6 @@
+<launch>
+  <arg name="required" default="true" />
+  <arg name="file" default="simple" />
+  <arg name="path" default="$(find oit_navigation_minibot_light_01)/config/rviz/$(arg file).rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg path)" required="$(arg required)" />
+</launch>
