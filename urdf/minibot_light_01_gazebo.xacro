@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="minibot_light_01">
+  <xacro:include filename="$(find oit_navigation_minibot_light_01)/urdf/minibot_light_01.xacro" />
+
+  <xacro:property name="caster_offset_x" value="-0.14" />
+  <xacro:property name="caster_mass" value="0.0315" />
+
+  <joint name="caster_joint" type="fixed">
+    <origin xyz="${caster_offset_x} 0 ${body_space/2}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="caster_link"/>
+  </joint>
+
+  <link name="caster_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="${body_space}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="${body_space}"/>
+      </geometry>
+      <material name="wheel_mat">
+        <color rgba="0.0 0.0 0.0 0.5"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${caster_mass}"/>
+      <xacro:sphere_inertia m="${caster_mass}" r="${body_space}"/>
+    </inertial>
+  </link>
+
+  <xacro:property name="tread" value="0.18" />
+  <xacro:property name="wheel_radius" value="0.03" />
+  <xacro:property name="wheel_thickness" value="0.008" />
+  <xacro:property name="wheel_mass" value="0.011" />
+
+  <joint name="left_wheel_joint" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin xyz="0 ${tread/2} ${wheel_radius}" rpy="${pi/2} 0 0"/>
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+  </joint>
+
+  <link name="left_wheel_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+      </geometry>
+      <material name="wheel_mat"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${wheel_mass}"/>
+      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+    </inertial>
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin xyz="0 ${-tread/2} ${wheel_radius}" rpy="${pi/2} 0 0"/>
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+  </joint>
+
+  <link name="right_wheel_link">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+      </geometry>
+      <material name="wheel_mat"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${wheel_mass}"/>
+      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+    </inertial>
+  </link>
+</robot>
