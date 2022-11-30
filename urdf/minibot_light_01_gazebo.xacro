@@ -46,73 +46,52 @@
   <xacro:property name="wheel_radius" value="0.03" />
   <xacro:property name="wheel_thickness" value="0.008" />
   <xacro:property name="wheel_mass" value="0.011" />
-  <xacro:property name="wheel_gazebo_mu" value="infinite" />
+  <xacro:property name="wheel_damping" value="0.1" />
+  <xacro:property name="wheel_friction" value="100" />
+  <xacro:property name="wheel_mu" value="2.5" />
 
-  <joint name="left_wheel_joint" type="continuous">
-    <axis xyz="0 0 1"/>
-    <origin xyz="0 ${tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
-    <parent link="base_link"/>
-    <child link="left_wheel_link"/>
-  </joint>
+  <xacro:macro name="wheel_joint" params="prefix xyz rpy dumping friction">
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <axis xyz="0 0 1"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <parent link="base_link"/>
+      <child link="${prefix}_wheel_link"/>
+      <dynamics damping="${wheel_damping}" friction="${wheel_friction}"/>
+    </joint>
+  </xacro:macro>
 
-  <link name="left_wheel_link">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
-      </geometry>
-      <material name="wheel_mat"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
-    </inertial>
-  </link>
+  <xacro:macro name="wheel_link" params="prefix radius thickness mass mu">
+    <link name="${prefix}_wheel_link">
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${thickness}"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${thickness}"/>
+        </geometry>
+        <material name="wheel_mat"/>
+      </visual>
+      <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <xacro:cylinder_inertia m="${mass}" r="${radius}" h="${thickness}"/>
+      </inertial>
+    </link>
 
-  <gazebo reference="left_wheel_link">
-    <material>Gazebo/Black</material>
-    <mu1>${wheel_gazebo_mu}</mu1>
-    <mu2>${wheel_gazebo_mu}</mu2>
-  </gazebo>
+    <gazebo reference="${prefix}_wheel_link">
+      <material>Gazebo/Black</material>
+      <mu1>${mu}</mu1>
+      <mu2>${mu}</mu2>
+    </gazebo>
+  </xacro:macro>
 
-  <joint name="right_wheel_joint" type="continuous">
-    <axis xyz="0 0 1"/>
-    <origin xyz="0 ${-tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
-    <parent link="base_link"/>
-    <child link="right_wheel_link"/>
-  </joint>
-
-  <link name="right_wheel_link">
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
-      </geometry>
-      <material name="wheel_mat"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
-    </inertial>
-  </link>
-
-  <gazebo reference="right_wheel_link">
-    <material>Gazebo/Black</material>
-    <mu1>${wheel_gazebo_mu}</mu1>
-    <mu2>${wheel_gazebo_mu}</mu2>
-  </gazebo>
+  <xacro:wheel_joint prefix="left" xyz="0 ${tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0" dumping="${wheel_damping}" friction="${wheel_friction}"/>
+  <xacro:wheel_link prefix="left" radius="${wheel_radius}" thickness="${wheel_thickness}" mass="${wheel_mass}" mu="${wheel_mu}"/>
+  <xacro:wheel_joint prefix="right" xyz="0 ${-tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0" dumping="${wheel_damping}" friction="${wheel_friction}"/>
+  <xacro:wheel_link prefix="right" radius="${wheel_radius}" thickness="${wheel_thickness}" mass="${wheel_mass}" mu="${wheel_mu}"/>
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -142,7 +121,7 @@
   <gazebo reference="base_laser_link">
     <sensor type="gpu_ray" name="YDLIDAR_X4">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
       <update_rate>10</update_rate>
       <ray>
         <scan>
