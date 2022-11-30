@@ -2,11 +2,16 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="minibot_light_01">
   <xacro:include filename="$(find oit_navigation_minibot_light_01)/urdf/minibot_light_01.xacro" />
 
-  <xacro:property name="caster_offset_x" value="-0.14" />
+  <material name="wheel_mat">
+    <color rgba="0.0 0.0 0.0 0.5"/>
+  </material>
+
+  <xacro:property name="caster_x" value="-0.14" />
+  <xacro:property name="caster_radius" value="${body_space/2}" />
   <xacro:property name="caster_mass" value="0.0315" />
 
   <joint name="caster_joint" type="fixed">
-    <origin xyz="${caster_offset_x} 0 ${body_space/2}" rpy="0 0 0"/>
+    <origin xyz="${caster_x} 0 ${caster_radius}" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="caster_link"/>
   </joint>
@@ -15,33 +20,37 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="${body_space}"/>
+        <sphere radius="${caster_radius}"/>
       </geometry>
     </collision>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="${body_space}"/>
+        <sphere radius="${caster_radius}"/>
       </geometry>
-      <material name="wheel_mat">
-        <color rgba="0.0 0.0 0.0 0.5"/>
-      </material>
+      <material name="wheel_mat"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="${caster_mass}"/>
-      <xacro:sphere_inertia m="${caster_mass}" r="${body_space}"/>
+      <xacro:sphere_inertia m="${caster_mass}" r="${caster_radius}"/>
     </inertial>
   </link>
+
+  <gazebo reference="caster_link">
+    <material>Gazebo/Black</material>
+    <mu1>0.01</mu1>
+    <mu2>0.01</mu2>
+  </gazebo>
 
   <xacro:property name="tread" value="0.18" />
   <xacro:property name="wheel_radius" value="0.03" />
   <xacro:property name="wheel_thickness" value="0.008" />
   <xacro:property name="wheel_mass" value="0.011" />
+  <xacro:property name="wheel_gazebo_mu" value="infinite" />
 
   <joint name="left_wheel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin xyz="0 ${tread/2} ${wheel_radius}" rpy="${pi/2} 0 0"/>
+    <origin xyz="0 ${tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
     <parent link="base_link"/>
     <child link="left_wheel_link"/>
   </joint>
@@ -62,14 +71,19 @@
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="${wheel_mass}"/>
       <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
     </inertial>
   </link>
 
+  <gazebo reference="left_wheel_link">
+    <material>Gazebo/Black</material>
+    <mu1>${wheel_gazebo_mu}</mu1>
+    <mu2>${wheel_gazebo_mu}</mu2>
+  </gazebo>
+
   <joint name="right_wheel_joint" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin xyz="0 ${-tread/2} ${wheel_radius}" rpy="${pi/2} 0 0"/>
+    <origin xyz="0 ${-tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
     <parent link="base_link"/>
     <child link="right_wheel_link"/>
   </joint>
@@ -90,8 +104,70 @@
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="${wheel_mass}"/>
       <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
     </inertial>
   </link>
+
+  <gazebo reference="right_wheel_link">
+    <material>Gazebo/Black</material>
+    <mu1>${wheel_gazebo_mu}</mu1>
+    <mu2>${wheel_gazebo_mu}</mu2>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <updateRate>30</updateRate>
+      <leftJoint>left_wheel_joint</leftJoint>
+      <rightJoint>right_wheel_joint</rightJoint>
+      <wheelSeparation>${tread}</wheelSeparation>
+      <wheelDiameter>${wheel_radius*2}</wheelDiameter>
+      <wheelAcceleration>${radians(360)}</wheelAcceleration>
+      <wheelTorque>0.028</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <odometrySource>world</odometrySource>
+      <publishWheelTF>false</publishWheelTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>false</publishWheelJointState>
+      <legacyMode>false</legacyMode>
+      <!-- suppress warning -->
+      <rosDebugLevel>na</rosDebugLevel>
+      <publishOdomTF>true</publishOdomTF>
+      <publishTf>true</publishTf>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_laser_link">
+    <sensor type="gpu_ray" name="YDLIDAR_X4">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>${radians(-180)}</min_angle>
+            <max_angle>${radians(180)}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>10.0</max>
+          <resolution>0.001</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_YDLIDAR_X4_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/base_scan</topicName>
+        <frameName>base_laser_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
 </robot>
