@@ -56,7 +56,6 @@
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <parent link="base_link"/>
       <child link="${prefix}_wheel_link"/>
-      <dynamics damping="${wheel_damping}" friction="${wheel_friction}"/>
     </joint>
   </xacro:macro>
 
@@ -111,7 +110,6 @@
       <publishOdom>true</publishOdom>
       <publishWheelJointState>false</publishWheelJointState>
       <legacyMode>false</legacyMode>
-      <!-- suppress warning -->
       <rosDebugLevel>na</rosDebugLevel>
       <publishOdomTF>true</publishOdomTF>
       <publishTf>true</publishTf>
