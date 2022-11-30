@@ -18,7 +18,7 @@ define YDLIDAR_X4 ranger
 (
   # https://www.ydlidar.com/products/view/5.html
   sensor(                         
-    range [ 0.0  11.0 ]
+    range [ 0.12  10.0 ]
     fov 360
     samples 720
   )
@@ -47,7 +47,7 @@ define robot position
   origin [-0.05 0 0 0] # move rotation center forward
   gui_nose 1
   drive "diff"
-  YDLIDAR_X4(pose [ 0.03 0 -0.0533 0 ])
+  YDLIDAR_X4(pose [ 0.03 0 -0.0894 0 ])
   IMX219_D160(pose [ 0.03 0 -0.03075 0 ])
   velocity_bounds     [-1.2 1.2 0 0 0 0 -270 270]
   acceleration_bounds [-1.2 1.2 0 0 0 0 -270 270]
