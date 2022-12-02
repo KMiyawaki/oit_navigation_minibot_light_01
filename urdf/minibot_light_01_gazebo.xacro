@@ -47,11 +47,9 @@
   <xacro:property name="wheel_thickness" value="0.008" />
   <xacro:property name="wheel_mass" value="0.11" />
   <!--0.011-->
-  <xacro:property name="wheel_damping" value="0.1" />
-  <xacro:property name="wheel_friction" value="100" />
   <xacro:property name="wheel_mu" value="25" />
 
-  <xacro:macro name="wheel_joint" params="prefix xyz rpy dumping friction">
+  <xacro:macro name="wheel_joint" params="prefix xyz rpy">
     <joint name="${prefix}_wheel_joint" type="continuous">
       <axis xyz="0 0 1"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
@@ -88,9 +86,9 @@
     </gazebo>
   </xacro:macro>
 
-  <xacro:wheel_joint prefix="left" xyz="0 ${tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0" dumping="${wheel_damping}" friction="${wheel_friction}"/>
+  <xacro:wheel_joint prefix="left" xyz="0 ${tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
   <xacro:wheel_link prefix="left" radius="${wheel_radius}" thickness="${wheel_thickness}" mass="${wheel_mass}" mu="${wheel_mu}"/>
-  <xacro:wheel_joint prefix="right" xyz="0 ${-tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0" dumping="${wheel_damping}" friction="${wheel_friction}"/>
+  <xacro:wheel_joint prefix="right" xyz="0 ${-tread/2} ${wheel_radius}" rpy="${radians(-90)} 0 0"/>
   <xacro:wheel_link prefix="right" radius="${wheel_radius}" thickness="${wheel_thickness}" mass="${wheel_mass}" mu="${wheel_mu}"/>
 
   <gazebo>
