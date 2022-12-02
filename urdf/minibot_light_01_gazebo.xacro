@@ -109,7 +109,7 @@
       <odometrySource>world</odometrySource>
       <publishWheelTF>false</publishWheelTF>
       <publishOdom>true</publishOdom>
-      <publishWheelJointState>false</publishWheelJointState>
+      <publishWheelJointState>true</publishWheelJointState>
       <legacyMode>false</legacyMode>
       <rosDebugLevel>na</rosDebugLevel>
       <publishOdomTF>true</publishOdomTF>
