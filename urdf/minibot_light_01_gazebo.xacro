@@ -45,10 +45,10 @@
   <xacro:property name="tread" value="0.18" />
   <xacro:property name="wheel_radius" value="0.03" />
   <xacro:property name="wheel_thickness" value="0.008" />
-  <xacro:property name="wheel_mass" value="0.011" />
+  <xacro:property name="wheel_mass" value="0.11" />
   <xacro:property name="wheel_damping" value="0.1" />
   <xacro:property name="wheel_friction" value="100" />
-  <xacro:property name="wheel_mu" value="2.5" />
+  <xacro:property name="wheel_mu" value="25" />
 
   <xacro:macro name="wheel_joint" params="prefix xyz rpy dumping friction">
     <joint name="${prefix}_wheel_joint" type="continuous">

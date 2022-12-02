@@ -27,6 +27,7 @@
   <xacro:property name="body_space" value="0.0195" />
   <xacro:property name="body_size_x" value="0.23" />
   <xacro:property name="body_size_y" value="0.23" />
+  <xacro:property name="body_collision_y" value="0.15" />
   <xacro:property name="body_size_z" value="${0.132 - body_space}" />
   <!-- 0.1125 -->
   <xacro:property name="body_x" value="-0.05" />
@@ -48,7 +49,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="${body_size_x} ${body_size_y} ${body_size_z}"/>
+        <box size="${body_size_x} ${body_collision_y} ${body_size_z}"/>
       </geometry>
     </collision>
     <visual>
@@ -74,7 +75,7 @@
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <xacro:box_inertia m="${body_mass}" x="${body_size_x}" y="${body_size_y}" z="${body_size_z}"/>
+      <xacro:box_inertia m="${body_mass}" x="${body_size_x}" y="${body_collision_y}" z="${body_size_z}"/>
     </inertial>
   </link>
 
