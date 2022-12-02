@@ -24,7 +24,7 @@ define YDLIDAR_X4 ranger
   )
   # generic model properties
   color "black"
-  size [ 0.05 0.05 0.1 ]
+  size [ 0.07 0.07 0.352 ]
   update_interval 25
 )
 
@@ -37,7 +37,12 @@ define IMX219_D160 camera
   pantilt [ 0.0 0.0 ]
 
   # model properties
-  size [ 0.03 0.02 0.05 ]
+  size [ 0.01 0.025 0.025 ]
+  color "green"
+)
+
+define antenna model(
+  size [0.05 0.025 0.1]
   color "black"
 )
 
@@ -49,6 +54,8 @@ define robot position
   drive "diff"
   YDLIDAR_X4(pose [ 0.03 0 -0.0894 0 ])
   IMX219_D160(pose [ 0.03 0 -0.03075 0 ])
+  antenna(pose [ 0.01  0.10 0 0 ])
+  antenna(pose [ 0.01 -0.10 0 0 ])
   velocity_bounds     [-1.2 1.2 0 0 0 0 -270 270]
   acceleration_bounds [-1.2 1.2 0 0 0 0 -270 270]
   update_interval 25
