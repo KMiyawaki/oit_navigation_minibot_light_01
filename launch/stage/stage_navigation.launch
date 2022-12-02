@@ -8,7 +8,7 @@
   <arg name="use_rviz" default="true" />
   <arg name="rviz_required" default="true" />
 
-  <include file="$(find oit_navigation_minibot_light_01)/launch/include/stage.launch">
+  <include file="$(find oit_navigation_minibot_light_01)/launch/stage/stage.launch">
     <arg name="map_dir" value="$(arg map_dir)" />
     <arg name="map_name" value="$(arg map_name)" />
     <arg name="use_rviz" value="false" />
