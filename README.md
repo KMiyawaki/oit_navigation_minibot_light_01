@@ -9,7 +9,7 @@ $ cd ~/catkin_ws/src
 $ git clone https://github.com/KMiyawaki/oit_navigation_minibot_light_01.git
 $ cd ~/catkin_ws/src/oit_navigation_minibot_light_01
 $ ./install.sh
-# 自動的に再起動される。
+$ sudo reboot
 ```
 
 - テレオペや地図作成にはジョイスティックがあった方が便利。
