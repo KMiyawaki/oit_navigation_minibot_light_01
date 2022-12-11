@@ -12,4 +12,4 @@ cd ~/catkin_ws
 catkin_make
 cd ~/catkin_ws/src/ydlidar_ros/startup
 sudo ./initenv.sh
-sudo reboot
+# sudo reboot
