@@ -9,7 +9,7 @@
 
   <include if="$(arg use_rviz)" file="$(find oit_navigation_minibot_light_01)/launch/include/rviz.launch">
     <arg name="file" value="simple" />
-    <arg name="required" value="$(arg rviz_required)" />
+    <arg name="required" value="true" />
   </include>
 
   <include file="$(find oit_navigation_minibot_light_01)/launch/include/robot_state_publisher.launch">
