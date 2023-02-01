@@ -1,19 +1,34 @@
 <launch>
   <arg name="port" default="/dev/ydlidar"/>
-  <node name="ydlidar_node" pkg="ydlidar_ros" type="ydlidar_node" output="screen" respawn="false">
+  <node name="ydlidar_ros_driver_node" pkg="ydlidar_ros_driver" type="ydlidar_ros_driver_node" output="screen" respawn="false">
+    <!-- string property -->
+    <param name="port" type="string" value="$(arg port)"/>
+    <param name="frame_id" type="string" value="base_laser_link"/>
+    <param name="ignore_array" type="string" value="" />
+    <!-- int property -->
+    <param name="baudrate" type="int" value="128000"/>
+    <!-- 0:TYPE_TOF, 1:TYPE_TRIANGLE, 2:TYPE_TOF_NET -->
+    <param name="lidar_type" type="int" value="1"/>
+    <!-- 0:YDLIDAR_TYPE_SERIAL, 1:YDLIDAR_TYPE_TCP -->
+    <param name="device_type" type="int" value="0"/>
+    <param name="samp_rate" type="int" value="5"/>
+    <param name="abnormal_check_count" type="int" value="4"/>
+    <!-- bool property -->
+    <param name="resolution_fixed" type="bool" value="true"/>
+    <param name="auto_reconnect" type="bool" value="true"/>
+    <param name="reversion" type="bool" value="false"/>
+    <param name="inverted" type="bool" value="true"/>
+    <param name="isSingleChannel" type="bool" value="false"/>
+    <param name="intensity" type="bool" value="false"/>
+    <param name="support_motor_dtr" type="bool" value="true"/>
+    <param name="invalid_range_is_inf" type="bool" value="true"/>
+    <param name="point_cloud_preservative" type="bool" value="false"/>
+    <!-- float property -->
     <param name="angle_min" type="double" value="-180" />
     <param name="angle_max" type="double" value="180" />
-    <param name="auto_reconnect" type="bool" value="true"/>
-    <param name="baudrate" type="int" value="115200"/>
-    <param name="frame_id" type="string" value="base_laser_link"/>
-    <param name="frequency" type="double" value="7"/>
-    <param name="ignore_array" type="string" value="" />
-    <param name="low_exposure" type="bool" value="false"/>
-    <param name="port" type="string" value="$(arg port)"/>
-    <param name="resolution_fixed" type="bool" value="true"/>
-    <param name="reversion" type="bool" value="false"/>
     <param name="range_min" type="double" value="0.1" />
-    <param name="range_max" type="double" value="16.0" />
-    <param name="samp_rate" type="int" value="9"/>
+    <param name="range_max" type="double" value="12.0" />
+    <!-- frequency is invalid, External PWM control speed -->
+    <param name="frequency" type="double" value="10"/>
   </node>
 </launch>
