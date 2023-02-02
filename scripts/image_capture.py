@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import datetime
 import rospy
 import sensor_msgs
 from cv_bridge import CvBridge, CvBridgeError
@@ -26,7 +27,7 @@ class SensorMessageGetter(object):
 def main():
     rospy.init_node('image_capture')
     topic_name = rospy.get_param('~topic_name', '/video_source/raw')
-    file_name = rospy.get_param('~file_name', 'sample.jpg')
+    file_name = rospy.get_param('~file_name', '')
     time_limit = rospy.get_param('~time_limit', 3)
     bridge = CvBridge()
     msg_getter = SensorMessageGetter(topic_name, sensor_msgs.msg.Image, time_limit)
@@ -34,6 +35,9 @@ def main():
     if msg:
         try:
             cv_image = bridge.imgmsg_to_cv2(msg, 'bgr8')
+            if file_name == '':
+                d = datetime.datetime.now()
+                file_name = d.strftime('%Y%m%d_%H%M%S.jpg')
             cv2.imwrite(file_name, cv_image)
             rospy.loginfo("Saved %s", file_name)
         except CvBridgeError as e:
