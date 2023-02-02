@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=devices
+Comment=
+Exec=bash -c "source /opt/ros/melodic/setup.bash && source $HOME/catkin_ws/devel/setup.bash && roslaunch oit_navigation_minibot_light_01 devices.launch use_rviz:=true"
+# Icon=/home/oit/ros.png
+Terminal=true
