@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=stop all
+Comment=stop all ROS nodes
+Exec=bash -c "~/catkin_ws/src/oit_navigation_minibot_light_01/scripts/stop_all.sh"
+Icon=oit_stop_all
+Terminal=true

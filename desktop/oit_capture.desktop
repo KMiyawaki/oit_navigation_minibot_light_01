@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=capture
+Comment=oit_navigation_minibot_light_01 image capture
+Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && source ~/.bashrc && rosrun oit_navigation_minibot_light_01 image_capture.py"
+Icon=oit_capture
+Terminal=true
