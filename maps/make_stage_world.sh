@@ -14,6 +14,10 @@ function extract_map_origin(){
   echo "${ORIGIN}"
 }
 
+function calc() {
+  awk "BEGIN {print $*}"
+}
+
 function main(){
   if [ $# -ne 1 ]; then
     echo "usage:${0} map_yaml" 1>&2
@@ -31,16 +35,16 @@ function main(){
   echo "Generated ${MAP_PNG}"
   local -r IMG_WIDTH=$(identify -format "%w" ${MAP_PNG})
   local -r IMG_HEIGHT=$(identify -format "%h" ${MAP_PNG})
-  local -r MAP_WIDTH=$(echo "scale=2;${IMG_WIDTH} * 0.05" | bc)
-  local -r MAP_HEIGHT=$(echo "scale=2;${IMG_HEIGHT} * 0.05" | bc)
+  local -r MAP_WIDTH=$(calc "${IMG_WIDTH} * 0.05")
+  local -r MAP_HEIGHT=$(calc "${IMG_HEIGHT} * 0.05")
   local -r ORIGIN=$(extract_map_origin "${MAP_YAML}")
   local OX=
   local OY=
   local OZ=
   read OX OY OZ <<< "${ORIGIN}"
   readonly OX;  readonly OY;  readonly OZ
-  local CX=$(echo "scale=2;${MAP_WIDTH} / 2 + ${OX}" | bc)
-  local CY=$(echo "scale=2;${MAP_HEIGHT} / 2 + ${OY}" | bc)
+  local CX=$(calc "${MAP_WIDTH} / 2 + ${OX}")
+  local CY=$(calc "${MAP_HEIGHT} / 2 + ${OY}")
   CX=$(printf "%.2f" ${CX})
   CY=$(printf "%.2f" ${CY})
   readonly CX;  readonly CY
