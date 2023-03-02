@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=navigation
+Comment=oit_navigation_minibot_light_01 navigation launcher
+Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && source ~/.bashrc && roslaunch oit_navigation_minibot_light_01 navigation.launch map_name:=test"
+Icon=oit_navigation
+Terminal=true

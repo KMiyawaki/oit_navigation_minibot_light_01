@@ -24,7 +24,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="365.20853"
+     inkscape:cx="262.93059"
      inkscape:cy="15.545878"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -295,6 +295,59 @@
            x="175.00613"
            y="12.265164"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;stroke-width:0.187404">top</tspan></text>
+    </g>
+    <g
+       id="g138"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.25148;stroke-opacity:1"
+         id="rect10-1-0"
+         width="16.681852"
+         height="16.681854"
+         x="129.30289"
+         y="5.4234529"
+         ry="1.5928094" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:15.5941px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.389854"
+         x="165.97298"
+         y="16.392807"
+         id="text837-1-7"
+         transform="scale(0.77910921,1.2835171)"><tspan
+           sodipodi:role="line"
+           id="tspan835-3-5"
+           x="165.97298"
+           y="16.392807"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.389854">S</tspan></text>
+      <g
+         id="g128"
+         transform="translate(0,-0.01439659)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:6.32526px;line-height:0.65;font-family:sans-serif;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.158131"
+           x="236.83606"
+           y="7.2743073"
+           id="text841-4-9"
+           transform="scale(0.5827894,1.7158857)"><tspan
+             sodipodi:role="line"
+             x="236.83606"
+             y="7.2743073"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;letter-spacing:0px;text-anchor:start;stroke-width:0.158131"
+             id="tspan90">ave</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:5.74944px;line-height:0.65;font-family:sans-serif;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.143736"
+           x="260.37091"
+           y="10.080385"
+           id="text841-4-9-0"
+           transform="scale(0.52973481,1.887737)"><tspan
+             sodipodi:role="line"
+             x="260.37091"
+             y="10.080385"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;letter-spacing:0px;text-anchor:start;stroke-width:0.143736"
+             id="tspan90-4">map</tspan></text>
+      </g>
     </g>
   </g>
 </svg>
