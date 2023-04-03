@@ -29,6 +29,6 @@
     <param name="range_min" type="double" value="0.1" />
     <param name="range_max" type="double" value="12.0" />
     <!-- frequency is invalid, External PWM control speed -->
-    <param name="frequency" type="double" value="10"/>
+    <param name="frequency" type="double" value="8"/>
   </node>
 </launch>
