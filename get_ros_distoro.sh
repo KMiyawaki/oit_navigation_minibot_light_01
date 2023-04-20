@@ -1,15 +1,14 @@
 #!/bin/bash
 
 function main(){
-    readonly VERSION_ID=`cat /etc/os-release | grep VERSION_ID`
-    if [[ $VERSION_ID =~ "16." ]]; then
-        echo "kinetic"
-    elif [[ $VERSION_ID =~ "18." ]]; then
-        echo "melodic"
-    elif [[ $VERSION_ID =~ "20." ]]; then
+    if [ -d /opt/ros/noetic ]; then
         echo "noetic"
+    elif [ -d /opt/ros/melodic ]; then
+        echo "melodic"
+    elif [ -d /opt/ros/kinetic ]; then
+        echo "kinetic"
     else
-        echo "*** ${VERSION_ID} is not supported ***"
+        echo "*** No supported ROS found ***"
     fi
 }
 
