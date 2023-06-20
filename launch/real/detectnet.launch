@@ -1,0 +1,44 @@
+<launch>
+  <arg name="use_rviz" default="true" />
+  <arg name="use_count_target_py" default="true" />
+  <arg name="rviz_required" default="true" />
+  <arg name="output" default="log" />
+  <!-- screen -->
+  <include file="$(find ros_deep_learning)/launch/video_source.ros1.launch">
+    <arg name="input" value="csi://0" />
+  </include>
+
+  <!-- DETECTNET -->
+  <arg name="model_name" default="ssd-mobilenet-v2"/>
+  <arg name="model_path" default=""/>
+  <arg name="prototxt_path" default=""/>
+  <arg name="class_labels_path" default=""/>
+  <arg name="input_blob" default=""/>
+  <arg name="output_cvg" default=""/>
+  <arg name="output_bbox" default=""/>
+  <arg name="overlay_flags" default="box,labels,conf"/>
+  <arg name="mean_pixel_value" default="0.0"/>
+  <arg name="threshold" default="0.5"/>
+
+  <node pkg="ros_deep_learning" type="detectnet" name="detectnet" output="$(arg output)">
+    <remap from="/detectnet/image_in" to="/video_source/raw"/>
+    <param name="model_name" value="$(arg model_name)"/>
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="prototxt_path" value="$(arg prototxt_path)"/>
+    <param name="class_labels_path" value="$(arg class_labels_path)"/>
+    <param name="input_blob" value="$(arg input_blob)"/>
+    <param name="output_cvg" value="$(arg output_cvg)"/>
+    <param name="output_bbox" value="$(arg output_bbox)"/>
+    <param name="overlay_flags" value="$(arg overlay_flags)"/>
+    <param name="mean_pixel_value" value="$(arg mean_pixel_value)"/>
+    <param name="threshold" value="$(arg threshold)"/>
+  </node>
+
+  <include if="$(arg use_rviz)" file="$(find oit_navigation_minibot_light_01)/launch/include/rviz.launch">
+    <arg name="file" value="detectnet" />
+    <arg name="required" value="$(arg rviz_required)" />
+  </include>
+
+  <node if="$(arg use_count_target_py)" pkg="oit_navigation_minibot_light_01" name="count_target" type="count_target.py" output="screen">
+  </node>
+</launch>
