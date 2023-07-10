@@ -5,9 +5,13 @@
   <arg name="output" default="log" />
   <arg name="use_usb_cam" default="false"/>
   <arg name="device_id" default="1"/>
+  <arg name="image_width" default="1920"/>
+  <arg name="image_height" default="1080"/>
   <!-- screen -->
   <include if="$(arg use_usb_cam)" file="$(find oit_navigation_minibot_light_01)/launch/include/usb_cam.launch">
     <arg name="device_id" value="$(arg device_id)" />
+    <arg name="image_width" value="$(arg image_width)" />
+    <arg name="image_height" value="$(arg image_height)" />
   </include>
   <include unless="$(arg use_usb_cam)" file="$(find ros_deep_learning)/launch/video_source.ros1.launch">
     <arg name="input" value="csi://0" />
