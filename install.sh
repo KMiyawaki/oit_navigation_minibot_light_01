@@ -15,6 +15,11 @@ function main(){
     sudo apt-get install -y ros-${TARGET_ROS}-teleop-twist-keyboard
     sudo apt-get install -y ros-${TARGET_ROS}-key-teleop
     sudo apt-get install -y xterm
+    if [[ $TARGET_ROS = "melodic" ]]; then
+        sudo /usr/bin/python2 -m pip install pyserial
+    else
+        sudo /usr/bin/python3 -m pip install pyserial
+    fi
     cd ${HOME}/catkin_ws
     catkin_make
 }
