@@ -49,5 +49,12 @@
   </include>
 
   <node if="$(arg use_count_target_py)" pkg="oit_navigation_minibot_light_01" name="count_target" type="count_target.py" output="screen">
+    <param name="min_width" value="100"/>
+    <param name="max_width" value="500"/>
+    <param name="min_height" value="200"/>
+    <param name="max_height" value="800"/>
+    <!--width / height-->
+    <param name="min_aspect" value="0.3"/>
+    <param name="max_aspect" value="0.9"/>
   </node>
 </launch>

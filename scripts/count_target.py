@@ -24,6 +24,13 @@ class CountTarget(object):
         topic_image_out = rospy.get_param('~topic_image_out', '~image_out')
         label_file = rospy.get_param(
             '~label_file', '/home/jetson/jetson-inference/data/networks/SSD-Mobilenet-v2/ssd_coco_labels.txt')
+        self.min_width = rospy.get_param('~min_width', 20)
+        self.max_width = rospy.get_param('~max_width', 200)
+        self.min_height = rospy.get_param('~min_height', 40)
+        self.max_height = rospy.get_param('~max_height', 400)
+        self.min_aspect = rospy.get_param('~min_aspect', 0.3)  # width / height
+        self.max_aspect = rospy.get_param('~max_aspect', 0.5)
+
         rospy.Subscriber(topic_detections, Detection2DArray, self.cb_detection)
         rospy.Subscriber(topic_image_in, Image, self.cb_image)
         self.detected_targets_pub = rospy.Publisher(
@@ -36,6 +43,16 @@ class CountTarget(object):
         self.bridge = CvBridge()
         rospy.loginfo('Start detection. target=%s, target_id=%d',
                       self.target, self.target_id)
+
+    def check_rect(self, rect):
+        if rect.width < self.min_width or self.max_width < rect.width:
+            return False
+        if rect.height < self.min_height or self.max_height < rect.height:
+            return False
+        aspect = rect.width / float(rect.height)
+        if aspect < self.min_aspect or self.max_aspect < aspect:
+            return False
+        return True
 
     def cb_image(self, data):
         bboxes = []
@@ -52,9 +69,14 @@ class CountTarget(object):
             r.height = b.size_y
             pt1 = (int(r.x), int(r.y))
             pt2 = (int(r.x + r.width), int(r.y + r.height))
-            cv2.rectangle(cv_array, pt1, pt2, color=(0, 255, 0),
-                          thickness=3, lineType=cv2.LINE_4, shift=0)
-            rects.rects.append(r)
+            if self.check_rect(r):
+                cv2.rectangle(cv_array, pt1, pt2, color=(0, 255, 0),
+                            thickness=3, lineType=cv2.LINE_4, shift=0)
+                rects.rects.append(r)
+            else:
+                rospy.logdebug("rejected %d %d %f" % (r.width, r.height, r.width / float(r.height)))
+                cv2.rectangle(cv_array, pt1, pt2, color=(0, 0, 255),
+                            thickness=3, lineType=cv2.LINE_4, shift=0)
         msg = self.bridge.cv2_to_imgmsg(cv_array, "bgr8")
         self.image_pub.publish(msg)
         if rects.rects:
