@@ -69,14 +69,22 @@ class CountTarget(object):
             r.height = b.size_y
             pt1 = (int(r.x), int(r.y))
             pt2 = (int(r.x + r.width), int(r.y + r.height))
+            c = (0, 255, 0)
+            font_margin = 5
             if self.check_rect(r):
-                cv2.rectangle(cv_array, pt1, pt2, color=(0, 255, 0),
-                            thickness=3, lineType=cv2.LINE_4, shift=0)
+                rospy.loginfo("accepted %d %d %f" %
+                              (r.width, r.height, r.width / float(r.height)))
                 rects.rects.append(r)
             else:
-                rospy.logdebug("rejected %d %d %f" % (r.width, r.height, r.width / float(r.height)))
-                cv2.rectangle(cv_array, pt1, pt2, color=(0, 0, 255),
-                            thickness=3, lineType=cv2.LINE_4, shift=0)
+                rospy.logwarn("rejected %d %d %f" %
+                              (r.width, r.height, r.width / float(r.height)))
+                c = (0, 0, 255)
+            cv2.putText(cv_array,
+                        "%d %d %.2f" % (r.width, r.height,
+                                        r.width / float(r.height)),
+                        (pt1[0] + font_margin, pt2[1] - font_margin), cv2.FONT_HERSHEY_SIMPLEX, 2.0, c, 2)
+            cv2.rectangle(cv_array, pt1, pt2, c,
+                          thickness=3, lineType=cv2.LINE_4, shift=0)
         msg = self.bridge.cv2_to_imgmsg(cv_array, "bgr8")
         self.image_pub.publish(msg)
         if rects.rects:
