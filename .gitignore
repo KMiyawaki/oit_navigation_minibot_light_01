@@ -52,3 +52,6 @@ CATKIN_IGNORE
 # DNN models
 /models/*
 !/models/get_models.sh
+
+/bags/*
+!/bags/.gitkeep
