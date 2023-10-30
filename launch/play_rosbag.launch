@@ -17,5 +17,6 @@
 
   <node name="playbag" pkg="rosbag" type="play" args="-r $(arg rate) --clock $(arg bag_path)" required="false">
     <remap from="/tf" to="$(arg tf_remap)" />
+    <remap from="/scan" to="/base_scan" />
   </node>
 </launch>
