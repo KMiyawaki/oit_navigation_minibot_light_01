@@ -4,11 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
         - /Status1
-        - /RobotModel1
-        - /TF1
-        - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 182
   - Class: rviz/Selection
@@ -74,6 +70,15 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        body_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
           Value: true
       Name: RobotModel
       Robot Description: robot_description
@@ -83,12 +88,18 @@ Visualization Manager:
       Visual Enabled: true
     - Class: rviz/TF
       Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: true
         base_laser_link:
           Value: true
         base_link:
+          Value: true
+        body_link:
+          Value: true
+        camera_link:
           Value: true
         map:
           Value: true
@@ -104,6 +115,10 @@ Visualization Manager:
           odom:
             base_link:
               base_laser_link:
+                {}
+              body_link:
+                {}
+              camera_link:
                 {}
       Update Interval: 0
       Value: true
@@ -128,7 +143,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic: /base_scan
       Unreliable: false
