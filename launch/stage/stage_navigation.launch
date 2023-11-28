@@ -1,7 +1,7 @@
 <launch>
-  <arg name="initial_pose_x" default="8" />
-  <arg name="initial_pose_y" default="0.5" />
-  <arg name="initial_pose_a" default="$(eval 90.0 / 180.0 * 3.1415)" />
+  <arg name="initial_pose_x" default="0" />
+  <arg name="initial_pose_y" default="0" />
+  <arg name="initial_pose_a" default="0" />
   <arg name="map_dir" default="$(find oit_navigation_minibot_light_01)/maps" />
   <arg name="map_name" default="HRC" />
   <arg name="map_path" default="$(arg map_dir)/$(arg map_name).yaml" />
