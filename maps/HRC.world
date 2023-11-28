@@ -17,15 +17,15 @@ window
 floorplan
 (
   bitmap "./HRC_border.png"
-  size [40.50 26.10 1.5]
-  pose [2.45 8.05 0 0 0]
+  size [21.3 22.9 1.5]
+  pose [5.65 6.45 0 0 0]
 )
 
 robot
 (
   # can refer to the robot by this name
   name "r0"
-  pose [8 0.5 0 90]
+  pose [0 0 0 0]
 )
 
 rect_block(
@@ -33,27 +33,7 @@ rect_block(
   color "blue"
 )
 
-rect_block(
-  pose [1 -2 0 0]
-  color "red"
-)
-
 polygon_block(
   pose [0 2 0 0]
-  color "yellow"
-)
-
-middle_block(
-  pose [9.5 3 0 0]
-  color "red"
-)
-
-middle_block(
-  pose [10 3 0 0]
-  color "blue"
-)
-
-middle_block(
-  pose [10.5 3 0 0]
   color "yellow"
 )
