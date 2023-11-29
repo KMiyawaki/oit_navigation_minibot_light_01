@@ -9,7 +9,7 @@ from opencv_apps.msg import Rect, RectArray
 from sensor_msgs.msg import Image
 from threading import Lock
 from cv_bridge import CvBridge
-
+from datetime import time, datetime
 
 class CountTarget(object):
     def __init__(self):
@@ -43,6 +43,17 @@ class CountTarget(object):
         self.bridge = CvBridge()
         rospy.loginfo('Start detection. target=%s, target_id=%d',
                       self.target, self.target_id)
+        self.csv = None
+        if rospy.get_param('~csv', True):
+            tm = datetime.now()
+            file_name = tm.strftime('%Y%m%d_%H%M%S_count_target.csv')
+            self.csv = open(file_name, 'w')
+            rospy.loginfo('Output count target results into ' + file_name)
+            self.csv.write('result, x, y, w, h, aspect(w/h)\n')
+
+    def __del__(self):
+        if self.csv:
+            self.csv.close()
 
     def check_rect(self, rect):
         if rect.width < self.min_width or self.max_width < rect.width:
@@ -71,14 +82,17 @@ class CountTarget(object):
             pt2 = (int(r.x + r.width), int(r.y + r.height))
             c = (0, 255, 0)
             font_margin = 5
+            text = "%d,%d,%d,%d,%f" % (r.x, r.y, r.width, r.height, r.width / float(r.height))
             if self.check_rect(r):
-                rospy.loginfo("accepted %d %d %f" %
-                              (r.width, r.height, r.width / float(r.height)))
+                text = "accepted," + text
+                rospy.loginfo(text)
                 rects.rects.append(r)
             else:
-                rospy.logwarn("rejected %d %d %f" %
-                              (r.width, r.height, r.width / float(r.height)))
+                text = "rejected," + text
+                rospy.logwarn(text)
                 c = (0, 0, 255)
+            if self.csv is not None:
+                self.csv.write(text + '\n')
             cv2.putText(cv_array,
                         "%d %d %.2f" % (r.width, r.height,
                                         r.width / float(r.height)),

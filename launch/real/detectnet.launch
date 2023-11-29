@@ -7,6 +7,7 @@
   <arg name="device_id" default="1"/>
   <arg name="image_width" default="1920"/>
   <arg name="image_height" default="1080"/>
+  <arg name="csv" default="true"/>
   <!-- screen -->
   <include if="$(arg use_usb_cam)" file="$(find oit_navigation_minibot_light_01)/launch/include/usb_cam.launch">
     <arg name="device_id" value="$(arg device_id)" />
@@ -56,5 +57,6 @@
     <!--width / height-->
     <param name="min_aspect" value="0.3"/>
     <param name="max_aspect" value="0.9"/>
+    <param name="csv" value="$(arg csv)"/>
   </node>
 </launch>
