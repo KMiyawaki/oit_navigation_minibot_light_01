@@ -9,6 +9,7 @@ $ cd ~/catkin_ws/src
 $ git clone https://github.com/KMiyawaki/oit_navigation_minibot_light_01.git
 $ cd ~/catkin_ws/src/oit_navigation_minibot_light_01
 $ ./install.sh
+$ sudo sh ~/catkin_ws/src/ydlidar_ros_driver/startup/initenv.sh
 $ sudo reboot
 ```
 
