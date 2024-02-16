@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=save map
 Comment=oit_navigation_minibot_light_01 save map
-Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && source ~/.bashrc && rosrun map_server map_saver -f test && mv test.pgm test.yaml ~/catkin_ws/src/oit_navigation_minibot_light_01/maps && nautilus ~/catkin_ws/src/oit_navigation_minibot_light_01/maps"
+Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && rosrun map_server map_saver -f test && mv test.pgm test.yaml ~/catkin_ws/src/oit_navigation_minibot_light_01/maps && nautilus ~/catkin_ws/src/oit_navigation_minibot_light_01/maps"
 Icon=oit_save_map
 Terminal=true

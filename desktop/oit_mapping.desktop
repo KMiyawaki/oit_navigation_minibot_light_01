@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=mapping
 Comment=oit_navigation_minibot_light_01 gmapping launcher
-Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && source ~/.bashrc && roslaunch oit_navigation_minibot_light_01 mapping.launch"
+Exec=bash -c "source /opt/ros/melodic/setup.bash && source ~/catkin_ws/devel/setup.bash && roslaunch oit_navigation_minibot_light_01 mapping.launch"
 Icon=oit_mapping
 Terminal=true
