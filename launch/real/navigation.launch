@@ -3,7 +3,7 @@
   <arg name="initial_pose_y" default="0" />
   <arg name="initial_pose_a" default="0" />
   <arg name="map_dir" default="$(find oit_navigation_minibot_light_01)/maps" />
-  <arg name="map_name" default="HRC" />
+  <arg name="map_name" default="1401" />
   <arg name="map_path" default="$(arg map_dir)/$(arg map_name).yaml" />
   <arg name="use_rviz" default="true" />
   <arg name="rviz_required" default="true" />

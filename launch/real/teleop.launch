@@ -2,7 +2,7 @@
   <arg name="use_rviz" default="true" />
   <arg name="rviz_required" default="true" />
   <!-- mouse joy key none -->
-  <arg name="teleop" default="key" />
+  <arg name="teleop" default="joy" />
   <arg name="use_camera" default="true" />
   <arg name="use_ydlidar" default="true" />
 
