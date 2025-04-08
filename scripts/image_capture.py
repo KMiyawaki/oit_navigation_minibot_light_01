@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+
+import cv2
 import rospy
 import sensor_msgs
 from cv_bridge import CvBridge, CvBridgeError
-import cv2
 
 
 class SensorMessageGetter(object):
@@ -30,7 +31,8 @@ def main():
     file_name = rospy.get_param('~file_name', '')
     time_limit = rospy.get_param('~time_limit', 3)
     bridge = CvBridge()
-    msg_getter = SensorMessageGetter(topic_name, sensor_msgs.msg.Image, time_limit)
+    msg_getter = SensorMessageGetter(
+        topic_name, sensor_msgs.msg.Image, time_limit)
     msg = msg_getter.get_msg()
     if msg:
         try:
