@@ -1,4 +1,4 @@
 NavfnROS:
   allow_unknown: true
   visualize_potential: false
-  default_tolerance: 0.1
+  # default_tolerance: 0.1
