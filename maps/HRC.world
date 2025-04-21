@@ -17,8 +17,8 @@ window
 floorplan
 (
   bitmap "./HRC_border.png"
-  size [13.1 21.2 1.5]
-  pose [3.14 6.00 0 0 0]
+  size [34.1 22.9 1.5]
+  pose [0.85 6.45 0 0 0]
 )
 
 robot
@@ -31,16 +31,6 @@ robot
 rect_block(
   pose [0 -2 0 0]
   color "blue"
-)
-
-rect_block(
-  pose [1 -2 0 0]
-  color "red"
-)
-
-rect_block(
-  pose [-1 -2 0 0]
-  color "yellow"
 )
 
 polygon_block(
